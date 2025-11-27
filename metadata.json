@@ -1,0 +1,7 @@
+{
+  "name": "Smart Lesson",
+  "description": "An intelligent web application that generates daily lesson plans based on the Qatar Ministry of Education and Higher Education template. Users provide a subject, grade, and topic, and the AI fills out the entire plan, which can then be edited and finalized.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

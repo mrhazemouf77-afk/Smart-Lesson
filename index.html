@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Lesson Plan Generator | مولد خطة الدرس بالذكاء الاصطناعي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+  <style>
+    html {
+      font-size: 16px;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7fafc;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .font-cairo {
+      font-family: 'Cairo', sans-serif;
+    }
+    .font-amiri {
+      font-family: 'Amiri', serif;
+    }
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    [dir="rtl"] input,
+    [dir="rtl"] textarea,
+    [dir="rtl"] select {
+      text-align: right;
+    }
+    [dir="rtl"] input::placeholder,
+    [dir="rtl"] textarea::placeholder {
+      text-align: right;
+    }
+    .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+      --tw-space-x-reverse: 1;
+    }
+
+    @media print {
+      body {
+        background-color: #fff;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .printable-area {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+    }
+
+    /* Animations */
+    @keyframes blob {
+      0% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+    .animate-blob {
+      animation: blob 7s infinite;
+    }
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+    
+    @keyframes gradient-xy {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .animate-gradient-xy {
+        background-size: 400% 400%;
+        animation: gradient-xy 15s ease infinite;
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 12s linear infinite;
+    }
+
+    @keyframes shine-button {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+    .animate-shine-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+        transform: skewX(-25deg);
+        animation: shine-button 3s infinite;
+    }
+
+    /* Styles for the official template layout */
+    .form-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      border: 1px solid black;
+    }
+    .form-table th, .form-table td {
+      border: 1px solid black;
+      padding: 0.25rem 0.5rem;
+      vertical-align: top;
+      font-size: 15px;
+    }
+    .form-table th, .form-table .header-cell {
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      background-color: #EAEAEA;
+    }
+    .form-table .label-cell {
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      background-color: #EAEAEA; 
+    }
+    .form-table .label-cell div {
+        line-height: 1.2;
+    }
+    .form-table .label-cell .en-label {
+        font-weight: normal;
+        font-size: 0.9em;
+    }
+    .form-table .input-cell, .form-table .textarea-cell {
+        padding: 0;
+    }
+    .form-table input, .form-table textarea {
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      background-color: transparent;
+      resize: none;
+      font-size: 15px;
+      font-family: 'Amiri', serif;
+      overflow-y: auto; /* Ensures scrollbar appears when content exceeds height */
+    }
+    .form-table input:focus, .form-table textarea:focus {
+      outline: 2px solid #4f46e5;
+      z-index: 10;
+      position: relative;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/",
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.25.0",
+      "docx": "https://aistudiocdn.com/docx@^8.5.0",
+      "tesseract.js": "https://aistudiocdn.com/tesseract.js@^5.1.0",
+      "pdfjs-dist": "https://aistudiocdn.com/pdfjs-dist@^4.4.168/build/pdf.min.mjs"
+    }
+  }
+  </script>
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
+</body>
+</html>
